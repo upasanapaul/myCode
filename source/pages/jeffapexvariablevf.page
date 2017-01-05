@@ -1,9 +1,0 @@
-<apex:page controller="repeaterCon">
-    <apex:form >
-    <apex:variable value="{!1}" var="rowNum" />
-    <apex:repeat value="{!collection}" var="row" >
-        ({!rowNum}){!row} 
-        <apex:variable var="rowNum" value="{!rowNum + 1}"/>
-    </apex:repeat>
-        </apex:form>
-</apex:page>
