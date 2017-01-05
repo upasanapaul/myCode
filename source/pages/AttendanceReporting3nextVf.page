@@ -1,0 +1,48 @@
+<!--Reporting Type : Controling Field -->
+<!-- Reporting Time : Dependent Field -->
+<apex:page controller="AttendanceReporting3" >
+    <apex:form >
+        <apex:pageBlock >
+
+            <apex:pageBlockButtons >
+             <apex:commandButton action="{!back}" value="Back"/>
+             <apex:commandButton action="{!save}" id="saveButton" Value="Save"/>
+                <apex:commandButton action="{!cancel}" id="cancelButton" value="Cancel"/>
+                <apex:commandButton action="{!sendEmail}" value="Send Email"/>
+            </apex:pageBlockButtons>
+            
+            <apex:pageMessages />
+
+            <apex:pageBlockSection title="You Selected" >
+                <apex:pageBlockTable value="{!selectedEmployee}" var="c" >
+                    <apex:column headerValue="Employee Name"><!-- done-->
+                        <apex:inputField value="{!c.mergeall__c}"/>
+                  	</apex:column>
+                    <apex:column headerValue="Date"><!-- done-->
+                        <apex:inputField value="{!c.Date__c}"/>
+                  	</apex:column>
+                    <apex:column headerValue="Date"><!-- done-->
+                        <apex:inputText value="{!c.Date__c}"/>
+                  	</apex:column>
+                   <!-- <apex:column headerValue="Date" > 
+                        <apex:outputField value="{!c.Date__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Reporting Type" >
+                        <apex:outputField value="{!c.Reporting_Type__c}" />
+                    </apex:column>
+                    <apex:column headerValue="Leave Type" >
+                        <apex:outputField value="{!c.Leave_Type__c}" />
+                    </apex:column>
+                    <apex:column headerValue="Reporting Time" >
+                        <apex:outputField value="{!c.Reporting_Time__c}" />
+                    </apex:column> -->
+       				<!--  <apex:column value="{!c.Leave_Type__c}" headerValue="Leave Type" />-->
+                    <!--  <apex:column value="{!c.Reporting_Type__c}" headerValue="Reporting Type"/> --->
+	                       
+                    <!--<apex:column value="{!c.Reporting_Time__c}" headerValue="Reporting Time"/>-->
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>           
+
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,23 @@
+<apex:page Controller="wrapperClassController">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!processSelected}" rerender="table"/>
+                <apex:commandButton value="Cancel" action="{!Cancel}" reRender=""/>
+                <apex:commandButton value="Select All" action="{!selectAll}" rerender="table"/>
+            </apex:pageBlockButtons>
+            <!-- In our table we are displaying the cContact records -->
+            <apex:pageBlockTable value="{!jobApps}" var="j" id="table">
+                <apex:column >
+                    <!-- This is our selected Boolean property in our wrapper class -->
+                    <apex:inputCheckbox value="{!j.selected}"/>
+                </apex:column>
+                <!-- This is how we access the contact values within our cContact container/wrapper -->
+                <apex:column value="{!j.job.Candidate__c}" />
+                <apex:column value="{!j.job.Status__c}" />
+                <apex:column value="{!j.job.Cover_Letter__c}" />
+                <apex:column value="{!j.job.Position__c}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

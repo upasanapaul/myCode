@@ -1,0 +1,23 @@
+<!-- For this example to render properly, you must associate the Visualforce page
+with a valid account record in the URL.
+For example, if 001D000000IRt53 is the account ID, the resulting URL should be:
+https://Salesforce_instance/apex/myPage?id=001D000000IRt53
+See the Visualforce Developer's Guide Quick Start Tutorial for more information. -->
+
+<apex:page standardController="Attendance_Reporting__c" >
+    <apex:form >
+        <apex:pageBlock title="My Content" mode="edit">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="My Content Section" columns="2">
+               <!-- <apex:inputField value="{!account.name}"/>
+                <apex:inputField value="{!account.site}"/>
+                <apex:inputField value="{!account.type}"/>
+                <apex:inputField value="{!account.accountNumber}"/>-->
+                <apex:inputField value="{!Attendance_Reporting__c.Date__c}" />
+                <apex:inputField value="{!Attendance_Reporting__c.Reporting_Time__c}" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
