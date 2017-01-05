@@ -1,0 +1,19 @@
+<apex:page controller="AttendanceReporting3">    
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Process Selected" action="{!processSelected}" />
+            </apex:pageBlockButtons>
+            
+           <!-- <apex:pageBlockTable value="{!contacts}" var="c" id="table">-->
+            <apex:pageBlockTable value="{!employeelist}" var="c" id="table" >
+                <apex:column >
+                    <apex:inputCheckbox value="{!c.selected}"/>
+                </apex:column>
+                <apex:column value="{!c.emp.mergeall__c}" headerValue="Name" />
+               <!-- <apex:column value="{!c.con.Email}" />
+                <apex:column value="{!c.con.Phone}" /> -->
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,118 @@
+<apex:page controller="EmplController2" sidebar="false" showHeader="false">
+    <apex:form id="form">
+        <apex:actionFunction name="deleteEmpRecord" action="{!deleteEmpRecord}" reRender="panelId">
+        	<apex:param name="eId" value="" assignTo="{!eId}"/>
+        </apex:actionFunction>
+        <apex:pageBlock id="details">
+            <apex:pageBlockButtons location="top" >
+                <apex:commandButton value="Add Employee" action="{!newEmployee}"  />
+                <apex:commandButton value="Today's Attendance" action="{!doReport}"/>
+            </apex:pageBlockButtons>
+           
+
+            <apex:pageBlockButtons location="bottom" >
+                
+                <style>
+			p
+			{
+                   
+				color:blue;
+			}
+                    #hiz{
+                    display: block;
+                    }
+                    h1 {
+ 			   				color: green;
+					}
+				</style>
+                
+                
+                
+                <apex:outputPanel id="myButtons" onmouseover="myFunction"	>
+                    <apex:commandButton style="height:30px;width:30px;" action="{!Beginning}" title="Beginning" value="<<" disabled="{!disablePrevious}" reRender="details,renderPanel"/>
+                    <apex:commandButton style="height:30px;width:30px;;" action="{!Previous}" title="Previous" value=" <" disabled="{!disablePrevious}" reRender="details,renderPanel"/>        
+                    <apex:commandButton style="height:30px;width:30px;" action="{!Next}" title="Next" value="> " disabled="{!disableNext}" reRender="details,renderPanel"/>
+                    <apex:commandButton style="height:30px;width:30px;" action="{!End}" title="End" value=">>" disabled="{!disableNext}" reRender="details,renderPanel"/> 
+                    <apex:pageBlockTable value="{!employeeRecords}" var="item" >
+                      
+                        <apex:facet name="footer">Showing Page # <b>{!pageNumber}</b> of <b>{!totalPages}</b></apex:facet>
+                        
+                    </apex:pageBlockTable>
+                </apex:outputPanel>
+                    
+                
+            </apex:pageBlockButtons>
+            
+            <script>
+            var lastRow;
+            function highlight(elem){
+                if(lastRow != undefined)
+                    lastRow.style.backgroundColor = 'white';	
+               		 
+                
+                elem.style.backgroundColor = 'rgba(54, 160, 254, 0.82)';
+               
+                lastRow = elem;
+            }
+            
+            function deleteRecord(eId){
+                var e = confirm('Are you sure you want to delete this Record?');
+                //alert(e);
+                if(e==true){
+                    //alert(e);
+                	deleteEmpRecord(eId);
+                }
+            }
+            </script>
+            <apex:outputPanel id="panelId">
+            <apex:pageBlockTable value="{!employeeRecords}" var="item" align="center"  onRowClick="highlight(this);">
+                <apex:column headervalue="Action (Edit/Delete)">
+                   <!-- <apex:outputLink title="" value="/{!item.id}/e?retURL=/apex/{!$CurrentPage.Name}">Edit</apex:outputLink>&nbsp;&nbsp;|&nbsp;&nbsp;-->
+                    <apex:outputLink title="" value="/apex/addEmployeeVf?id={!item.id}&retURL=/apex/{!$CurrentPage.Name}&saveURl=/apex/{!$CurrentPage.Name}">Edit</apex:outputLink>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <apex:commandLink onclick="deleteRecord('{!item.id}'); return false" value="Delete"></apex:commandLink>
+                </apex:column>
+                
+                <apex:column headerValue="Employee Names">
+                    <apex:commandlink value="{!item.Name}" action="{!ShowBlockMethod}" rerender="renderPanel">
+                        <apex:param name="recId" value="{!item.Id}" assignTo="{!id1}"/>
+                    </apex:commandlink>
+                </apex:column>
+                
+                <apex:column headerValue="Employee Id"><apex:outputText >{!item.EmployeeId__c}</apex:outputText></apex:column>
+                <apex:column headerValue="Role" value="{!item.Role__c}"/>
+            </apex:pageBlockTable>
+                </apex:outputPanel>
+        </apex:pageBlock>
+        <apex:outputPanel id="renderPanel">
+            <apex:panelGrid columns="2" rendered="{!ShowpageBlockFlag}">
+                <apex:pageBlock id="a">
+                    <apex:pageBlockButtons location="top" >
+                        <apex:commandButton value="Assign Project" action="{!showSelectedMethod}" />
+                    </apex:pageBlockButtons>
+                    <apex:pageBlockTable value="{!proj}" var="pr" columnsWidth="250px, 250px" >
+                        <apex:column value="{!pr.Project_Accounts__r.Name}" headerValue="Project Name"  />
+                        <apex:column value="{!pr.Project_Accounts__r.Project_Code__c}" headerValue="Project Code" />
+                        
+                        <apex:column headerValue="Release">
+                            <apex:commandlink value="Release" action="{!releaseButton}" rerender="renderPanel" >
+                                <apex:param name="Release" value="{!pr.Project_Accounts__r.id}" assignTo="{!releaseID}"  />
+                            </apex:commandlink>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:pageBlock>
+                
+                <apex:pageBlock id="b"  >
+                    <apex:pageBlockButtons location="top" >
+                        <!--<apex:commandButton value="Report Attendance" action="{!newAttendance}"/>-->
+                        <apex:commandButton value="View Leaves" action="{!ShowLeavesMethod}"  />
+                    </apex:pageBlockButtons>
+                    <apex:pageBlockTable value="{!rowlist}" var="row" align="centre" columnsWidth="180px, 180px, 180px" >
+                        <apex:column headerValue="RL" value="{!row.rl}" />
+                        <apex:column headerValue="NRL" value="{!row.nrl}" />
+                        <apex:column headerValue="L" value="{!row.leave}" />
+                    </apex:pageBlockTable>
+                </apex:pageBlock> 
+            </apex:panelGrid>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,20 @@
+<apex:page controller="EmplController2" showHeader="false" sidebar="false">
+    <apex:form >
+        <apex:pageBlock rendered="{!showLeaves}" title="{!name}" >
+            <apex:pageBlockSection >
+                <apex:pageBlockTable value="{!LeaveList}" var="dt">
+                    <apex:column headerValue="Leave Dates" >
+                        <apex:outputText value="{0,date,dd'/'MM'/'yyyy}">
+                            <apex:param value="{!dt.dateList}" />
+                        </apex:outputText>
+                    </apex:column>
+                    
+                    
+                    
+                    <apex:column headerValue="Leave Type" value="{!type}" />
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:commandButton value="Back" action="{!leavePageReturnButton}"/>
+    </apex:form>
+</apex:page>

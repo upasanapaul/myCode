@@ -1,0 +1,61 @@
+<apex:page controller="saveAttendance" id="myPage" sidebar="false" showHeader="false">  
+      <script>
+    /* function myJavascript(thiss){
+       alert('hi');
+   var ele=document.getElementById('{!$Component.myPage.myForm.myPageBlock.myPageSection.myPageBlockTable.myReportType}');
+       alert(ele);
+       var opt=ele.options[ele.selectedIndex].value;
+       alert(opt);  
+       if (ele=='RL')
+    {
+        alert(ele);
+    var newEle= document.getElementById('{!$Component.myPage.myForm.myPageBlock.myPageSection.myPageBlockTable.myReportTime}');
+    newEle.disabled=true;
+    }
+       }*/
+  </script>
+    <apex:form id="myForm">    
+        <apex:pageBlock id="myPageBlock" >
+            <apex:pageBlockButtons >
+             <apex:commandButton action="{!back}" value="Back" id="back" />
+             <apex:commandButton action="{!save}" id="saveButton" Value="Save"/>
+             <apex:commandButton value="Cancel" action="{!backProcessSelected}"/>
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockSection title="You Selected" columns="1" id="myPageSection"  >    
+                <apex:pageBlockTable value="{!allEmployee}" var="c" id="myPageBlockTable" columnsWidth="200px,200px,200px,200px">
+                     
+                    <apex:column headerValue="Employee Name"  >
+                        <apex:outputField value="{!c.Employee_Name__c}"  id="myEmpName"/>
+                    </apex:column>
+                      <apex:column headerValue="Date" > 
+                        <apex:inputField value="{!c.Date__c}" id="myDate"/>
+                    </apex:column>
+                    
+                    
+                    <apex:column headerValue="Reporting Type"  >
+                       
+                        <apex:inputField value="{!c.Reporting_Type__c}" id="myReportType">
+                            <apex:actionSupport event="onchange" reRender="myoutputpanel"/></apex:inputField>
+                                                     
+                     </apex:column>
+                       
+                    <apex:column headerValue="Leave Type"  >
+                        <apex:inputField value="{!c.Leave_Type__c}" id="myLeaveType" />
+                    </apex:column>
+                    
+                     
+                    <apex:column headerValue="Reporting Time"  >
+                        <apex:outputPanel id="myoutputpanel">
+                        <apex:inputField value="{!c.Reporting_Time__c}"  rendered="{!c.Reporting_Type__c=='RL'}" html-placeholder="Reporting Time"/>
+                         <apex:outputField value="{!c.Reporting_Time__c}"  rendered="{!c.Reporting_Type__c!='RL'}" />    
+                        </apex:outputPanel>
+                    </apex:column> 
+                      
+                    
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>  
+                
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

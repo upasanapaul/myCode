@@ -1,0 +1,24 @@
+<apex:page standardController="Employee__c" extensions="addEmployeeController" sidebar="false" showHeader="false">
+    <script>
+    function returnEmployee(){
+        window.location.href = window.open('/apex/EmplControllerPage','_parent');
+   
+    }
+    
+    
+    
+    </script>
+    <apex:form >
+       <apex:pageBlock mode="edit">
+           <apex:pageBlockButtons location="top">
+               <apex:commandButton value="save" title="Save" action="{!saveRecord}"/>
+               <apex:commandButton value="cancel" title="cancel" action="{!cancel}"/>
+           </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1" showHeader="true" title="Add New Employee">
+    	<apex:inputField value="{!employee.Name}" required="true"/>
+    	<apex:inputField value="{!employee.Role__c}" required="true"/>
+        <apex:inputField value="{!employee.EmployeeId__c}" />
+        <apex:inputField value="{!employee.Email__c}" />
+           </apex:pageBlockSection></apex:pageBlock>
+    </apex:form> 
+</apex:page>
