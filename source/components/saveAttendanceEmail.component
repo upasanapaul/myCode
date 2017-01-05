@@ -1,0 +1,96 @@
+<apex:component controller="saveAttendance" access="global">
+
+        
+          <style type="text/css">
+           table, th, td {
+    		border: 1px solid black;
+   			 border-collapse: collapse;
+              width:400px;
+              cursor:default;
+               color: black; 
+}        
+              
+        </style> 
+<script type="text/javascript">
+    var rows = document.getElementsByTagName('tr');
+	for (var i=0;i<rows.length;i++) {
+    var t = rows[i].innerText || rows[i].textContent;
+    if (t.trim().length==0) rows[i].style.display='none';
+}
+</script>    
+     <!-- <apex:dataTable value="{!allEmployee}" var="oneAttenObj">
+          
+          <apex:column headerValue="Name" />
+          <apex:column >
+            <apex:facet name="header"> Name</apex:facet>
+            {!oneAttenObj.Employees__c}
+        </apex:column> 
+           <apex:column >
+            <apex:facet name="header"> Date</apex:facet>
+            {!oneAttenObj.Date__c}
+        </apex:column>
+          <apex:column >
+            <apex:facet name="header"> Reporting Type</apex:facet>
+            {!oneAttenObj.Reporting_Type__c}
+        </apex:column>        
+           <apex:column >
+            <apex:facet name="header"> Reporting Time</apex:facet>
+            {!oneAttenObj.Reporting_Time__c}
+        </apex:column> 
+          <apex:column >	
+            <apex:facet name="header"> Leave Type</apex:facet>
+            {!oneAttenObj.Leave_Type__c}
+        </apex:column>
+    </apex:dataTable>-->
+   
+        <body>
+            <table border="0" >
+                <tr>
+                    <th>RL</th>
+                    <th>Expected Time To Report</th>
+                    
+                    
+                </tr>
+                <apex:repeat var="cx" value="{!allEmployeeMail}">
+                <apex:outputPanel rendered="{!cx.Reporting_Type__c=='RL'}">
+                    <tr>
+                    <!--<td>{!cx.Employees__c}</td>
+                    <td>{!cx.Date__c}</td>
+                    <td>{!cx.Reporting_Type__c}</td>
+                    <td>{!cx.Reporting_Time__c}</td>
+                    <td>{!cx.Leave_Type__c}</td>-->
+                    <td><apex:outputText value="{!cx.Employees__r.Name}" /></td>
+                    <td><apex:outputField value="{!cx.Reporting_Time__c}"/> </td>	                     
+                </tr>
+                    </apex:outputPanel>
+                </apex:repeat> 
+            </table>
+            
+            <p> Leave Details</p>
+            <table border="0">
+                <tr>
+                    
+                    <th>Leave</th>
+                    <th>WFH</th>
+                    <th>NRL</th>
+                </tr>
+                <apex:repeat var="cx" value="{!allEmployeeMail}" >
+                <apex:outputPanel rendered="{!cx.Reporting_Type__c !='RL'}">
+                    <tr>
+
+                    <td><apex:outputText value="{!cx.Employees__r.Name +'('+ cx.Leave_Type__c+')' }"  rendered="{!cx.Reporting_Type__c =='L'}"  /> </td>     
+               
+                    <td><apex:outputField value="{!cx.Employees__r.Name}" rendered="{!cx.Reporting_Type__c =='WFH'}"  /> </td>
+                                               
+                    <td><apex:outputField value="{!cx.Employees__r.Name}" rendered="{!cx.Reporting_Type__c =='NRL'}" /> </td>
+                        
+                	</tr>
+                   </apex:outputPanel> 
+                </apex:repeat> 
+            </table>
+                    
+        </body> 
+    
+
+
+</apex:component>
