@@ -1,6 +1,7 @@
 public with sharing class AccountTrgClass {
   static public void accountUpdate(List<Account> newt, List<Account> oldt)
   {
+  	//this is a comment
      List<Contact> cl=new List<Contact>();
      List<String> sendTo = new List<String>();
     
